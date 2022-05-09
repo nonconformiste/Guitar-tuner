@@ -1,4 +1,7 @@
 <template>
+<div class="start error" v-if="mob">
+  Unfortunately, online tuner is currently only available for PC.
+</div>
 <div class="start">
   Press to start tune
 </div>
@@ -22,6 +25,15 @@ export default {
   methods:  {
     go(href){
       window.open(href, '_blank').focus();
+    }
+  },
+  computed: {
+    mob(){
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+       return true;
+      } else {
+        return false;
+      }
     }
   }
 }
@@ -123,6 +135,13 @@ export default {
     text-align: center;
     transition: 0.3s;
     z-index: 999;
+  }
+
+  .start.error {
+    z-index: 999999;
+    background: black;
+    pointer-events: none;
+    font-size: 18px;
   }
 
   .start.hidden {
